@@ -25,6 +25,11 @@ const GuestInfoContainer = () => {
     isSupperhost,
     toHostMessage,
     changeInitialMessage,
+    checkin,
+    checkout,
+    adult,
+    child,
+    infant,
   } = useSelector(
     state => ({
       id: state.home.homeState.home.id,
@@ -33,6 +38,11 @@ const GuestInfoContainer = () => {
       isSupperhost: state.home.homeState.home.host.isSupperhost,
       toHostMessage: state.reservation.toHostMessage,
       changeInitialMessage: state.reservation.changeInitialMessage,
+      checkin: state.reservation.checkin,
+      checkout: state.reservation.checkout,
+      adult: state.reservation.guests.adult,
+      child: state.reservation.guests.child,
+      infant: state.reservation.guests.infant,
     }),
     shallowEqual,
   );
@@ -44,7 +54,13 @@ const GuestInfoContainer = () => {
   const onNextPage = () => {
     if (!changeInitialMessage) dispatch(setChangeInitialMessage());
     if (!toHostMessage) return;
-    history.push(`/Reservation/Payment/${id}`);
+    history.push(
+      `/Reservation/Payment/${id}?${checkin && 'checkIn=' + checkin}${
+        checkout && '&checkOut=' + checkout
+      }${+adult ? '&adult=' + adult : ''}${+child ? '&child=' + child : ''}${
+        +infant ? '&infant=' + infant : ''
+      }`,
+    );
   };
 
   const onSetMessage = ({ target }) => {

@@ -11,20 +11,12 @@ const ReservationBox = ({
   multipliedPrice,
   percentage,
   totalPrice,
-  // removedCommaPrice,
   rating,
   count,
-  // getPercentage,
-  // getTotalPrice,
-  // getmultipliedPrice,
   dateDiff,
   notChecked,
   onGoToReservation,
 }) => {
-  // const multipliedPrice = getmultipliedPrice(removedCommaPrice, dateDiff);
-  // const percentage = getPercentage(removedCommaPrice * dateDiff);
-  // const totalPrice = getTotalPrice(removedCommaPrice * dateDiff, percentage);
-
   return (
     <StWarpper>
       <StStickyWrapper>
@@ -43,16 +35,6 @@ const ReservationBox = ({
 
           <StWriteWrapper>
             <CheckPopupContainer checkPopupRef={checkPopupRef} />
-            {/* <StCheckWrapper tabIndex="0">
-              <StCheckIn>
-                <StName>체크인</StName>
-                <StContent>{checkin ? checkin : '날짜 추가'}</StContent>
-              </StCheckIn>
-              <StCheckOut>
-                <StName>체크아웃</StName>
-                <StContent>{checkout ? checkout : '날짜 추가'}</StContent>
-              </StCheckOut>
-            </StCheckWrapper> */}
 
             <DeatailGuestPopupContainer displayName />
           </StWriteWrapper>

@@ -79,7 +79,7 @@ const DetailPopupContainer = ({
           </StPopupCheckOut>
         </StInputsWrapper>
       </StPopupTopWrapper>
-      <StDetailCalendarContainer />
+      <StDetailCalendarContainer isReservationBox />
       <StPopupbottomWrapper>
         <CalendarKeybordBtnContainer />
         <StCalendarDeleteBtnContainer />

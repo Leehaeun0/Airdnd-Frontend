@@ -10,7 +10,13 @@ import CalendarKeybordBtnContainer from '../../Containers/Detail/CalendarKeybord
 //   setChangeInitialDate,
 // } from '../../Modules/reservation';
 
-const Schedule = () => {
+const Schedule = ({
+  checkinString,
+  checkoutString,
+  allChecked,
+  onlyCheckin,
+  minimumStay,
+}) => {
   // const dispatch = useDispatch();
 
   // const onClick = () => {
@@ -21,7 +27,11 @@ const Schedule = () => {
   return (
     <Division title="체크인 날짜를 선택해주세요." padding="8px">
       <StTravelTerm>
-        여행 날짜를 입력하여 정확한 요금을 확인하세요.
+        {onlyCheckin
+          ? `최소 숙박 일수: ${minimumStay}박`
+          : allChecked
+          ? `${checkinString} - ${checkoutString}`
+          : '여행 날짜를 입력하여 정확한 요금을 확인하세요.'}
       </StTravelTerm>
       <DetailCalendarContainer />
       <CalendarKeybordBtnContainer />
@@ -45,6 +55,7 @@ const Schedule = () => {
 };
 
 const StTravelTerm = styled.div`
+  padding-top: 4px;
   margin-bottom: 20px;
   line-height: 18px;
   font-size: 14px;

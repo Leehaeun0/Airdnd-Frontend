@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import HomeExplain from './HomeExplain';
 import Bedrooms from './Bedrooms';
 import Amenities from './Amenities';
 import ScheduleContainer from '../../Containers/Detail/ScheduleContainer';
 import ReservationBoxContainer from '../../Containers/Detail/ReservationBoxContainer';
+import { setScrollLocationY } from '../../Modules/home';
 
 const HomeInfos = ({ isLoading, home, isScreenMedium }) => {
+  const ref = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setScrollLocationY('homeInfosRef', ref.current));
+  }, []);
+
   return (
-    <StHomeInfos>
+    <StHomeInfos ref={ref}>
       <StInfosWrapper>
         <HomeExplain isLoading={isLoading} home={home} />
         {!isLoading && (
           <>
             <Bedrooms home={home} />
             <Amenities home={home} isScreenMedium={isScreenMedium} />
-            <ScheduleContainer home={home} />
+            <ScheduleContainer />
           </>
         )}
       </StInfosWrapper>

@@ -24,6 +24,9 @@ const Calendar = ({
   checkAfterReserved,
   checkBeforeCheckin,
   beforeToday,
+  stayDates,
+  minimumStay,
+  isReservationBox,
   ...rest
 }) => {
   const addZero = num => ((num + '').length === 1 ? '0' + num : num);
@@ -46,37 +49,62 @@ const Calendar = ({
         </StDays>
         <StDates onMouseLeave={onMouseLeave}>
           {nowMonthDates.map((date, i) => {
-            const nowDate = `${nowMonth.year}.${_nowMonth}.${addZero(date)}`;
+            const _date = addZero(date);
+            const nowDate = `${nowMonth.year}.${_nowMonth}.${_date}`;
             const dateTime = new Date(nowDate).getTime();
             const reserved = reservedDates.find(v => v === nowDate);
             const isAfterReserved = reserved || checkAfterReserved(dateTime);
+            const isCheckin = checkin === nowDate;
+            const isCheckout = checkout === nowDate;
+            const stayDate = stayDates.find(v => v === nowDate);
+
             return (
               <StDateWrapper
                 key={i}
                 onClick={onClickWrapper}
                 margin={nowMonth.firstDay}
                 darken={checkin && !isAfterReserved && getDiff(dateTime)}
-                checkin={checkin === nowDate}
-                checkout={checkout === nowDate}
+                checkin={isCheckin}
+                checkout={isCheckout}
                 hoverDate={hoverDate === nowDate}
+                stayDate={stayDate}
+                reserved={reserved}
+                beforeToday={beforeToday(dateTime)}
+                afterReserved={isAfterReserved && !checkout}
+                beforeCheckin={
+                  isDetailPage && !checkout && checkBeforeCheckin(dateTime)
+                }
               >
                 <StDateBtn
-                  id={`dateId-${nowMonth.year}.${_nowMonth}.${addZero(date)}`}
+                  id={`dateId-${nowMonth.year}.${_nowMonth}.${_date}`}
                   onClick={e => onClickCheckDate(e, dateTime, reserved)}
                   onMouseEnter={onMouseenter}
-                  checkin={checkin === nowDate}
-                  checkout={checkout === nowDate}
+                  checkin={isCheckin}
+                  checkout={isCheckout}
                   hoverDate={hoverDate === nowDate && !isAfterReserved}
-                  reserved={reserved}
-                  beforeToday={beforeToday(dateTime)}
-                  afterReserved={isAfterReserved && !checkout}
-                  beforeCheckin={
-                    isDetailPage && !checkout && checkBeforeCheckin(dateTime)
-                  }
+                  stayDate={stayDate}
                   btnType="circle"
                 >
                   {date}
                 </StDateBtn>
+
+                {isDetailPage && (isCheckin || isCheckout || stayDate) && (
+                  <StTooltipWrapper>
+                    <div className="tooltip">
+                      <div>
+                        {stayDates.length
+                          ? `최소 ${minimumStay}박`
+                          : isCheckin
+                          ? '체크인 요일'
+                          : '체크아웃 요일'}
+                      </div>
+                      <svg role="presentation" focusable="false">
+                        <path className="arrow1" d="M0,0 20,0 10,10z"></path>
+                        <path className="arrow2" d="M0,0 10,10 20,0"></path>
+                      </svg>
+                    </div>
+                  </StTooltipWrapper>
+                )}
               </StDateWrapper>
             );
           })}
@@ -95,7 +123,8 @@ const Calendar = ({
           <AiOutlineRight />
         </StNextMonthBtn>
         {renderCalendar(thisMonthDates, thisMonth)}
-        {!responsiveScreen && renderCalendar(nextMonthDates, nextMonth)}
+        {(!responsiveScreen || isReservationBox) &&
+          renderCalendar(nextMonthDates, nextMonth)}
       </StWrapper>
     </>
   );
@@ -109,7 +138,6 @@ const StWrapper = styled.div`
   min-width: 308px;
   min-height: 300px;
   margin-top: 30px;
-  cursor: pointer;
 
   ${({ isDetailPage }) =>
     isDetailPage &&
@@ -163,7 +191,7 @@ const StDays = styled.ul`
   li {
     display: inline-block;
     width: 44px;
-    padding: 5px 0 10px;
+    padding: 5px 0 22px;
     text-align: center;
     font-size: 12px;
     color: ${({ theme }) => theme.color.darkGray};
@@ -172,8 +200,14 @@ const StDays = styled.ul`
 
 const StDates = styled.div``;
 
+const StTooltipWrapper = styled.div`
+  display: none;
+`;
+
 const StDateWrapper = styled.div`
   display: inline-block;
+  position: relative;
+  top: -13px;
   width: 44px;
   height: 44px;
 
@@ -200,6 +234,65 @@ const StDateWrapper = styled.div`
       border-top-right-radius: 50%;
       border-bottom-right-radius: 50%;
     `}
+
+
+  ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
+    (reserved || beforeToday || beforeCheckin || afterReserved) &&
+    css`
+      cursor: initial;
+
+      & button {
+        color: rgba(72, 72, 72, 0.25);
+        text-decoration: line-through;
+        font-weight: 400;
+        cursor: initial;
+
+        :hover {
+          border: none;
+        }
+      }
+    `}
+
+    
+  ${({ checkin, checkout, stayDate }) =>
+    (checkin || checkout || stayDate) &&
+    css`
+
+    &:hover > div {
+      display: block;
+      position: absolute;
+      transform: translate(-25%, -100%);
+      left: 0px;
+      top: -12px;
+      white-space: nowrap;
+      z-index: 3;
+
+      > div.tooltip {
+        background: white;
+        border: 1px solid ${({ theme }) => theme.color.shadow};
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px;
+        position: relative;
+        display: inline-block;
+        padding: 4px 8px;
+        font-size: 14px;
+
+        svg {
+          position: absolute;
+          width: 20px;
+          height: 10px;
+          bottom: -10px;
+          left: 50%;
+          margin-left: -10px;
+        }
+        .arrow1 {
+          fill: white;
+        }
+        .arrow2 {
+          stroke: ${({ theme }) => theme.color.shadow};
+          fill: transparent;
+        }
+      }
+  `}
 `;
 
 const StDateBtn = styled(Button)`
@@ -222,16 +315,13 @@ const StDateBtn = styled(Button)`
       color: ${({ theme }) => theme.color.white};
     `}
 
-  ${({ reserved, beforeToday, beforeCheckin, afterReserved }) =>
-    (reserved || beforeToday || beforeCheckin || afterReserved) &&
+  ${({ stayDate }) =>
+    stayDate &&
     css`
-      color: rgba(72, 72, 72, 0.25);
-      text-decoration: line-through;
-      font-weight: 400;
-      cursor: initial;
+      color: ${({ theme }) => theme.color.darkGray};
 
       :hover {
-        border: none;
+        border-color: ${({ theme }) => theme.color.line};
       }
     `}
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BookmarkListModal,
   NewBookmarkModal,
@@ -10,6 +10,7 @@ import {
   openNewModal,
   closeListModal,
   closeNewModal,
+  fetchBookmarkLists,
 } from '../../Modules/wishlists';
 
 const BookmarkListModalContainer = () => {
@@ -32,6 +33,10 @@ const BookmarkListModalContainer = () => {
       }),
     );
   };
+
+  useEffect(() => {
+    dispatch(fetchBookmarkLists());
+  }, [dispatch]);
 
   return (
     <BookmarkListModal

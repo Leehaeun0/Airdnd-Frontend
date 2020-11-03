@@ -29,7 +29,8 @@ const PaymentContainer = () => {
 
   /* 1. 가맹점 식별하기 */
   const { IMP } = window;
-  IMP.init('imp06318705');
+  // eslint-disable-next-line no-undef
+  IMP.init(process.env.REACT_APP_PAYMENT_API_KEY);
 
   const onClickPayment = () => {
     /* 2. 결제 데이터 정의하기 */

@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { css } from 'styled-components';
 import Division from './Division';
 import Button from '../Global/Button';
+import { setScrollLocationY } from '../../Modules/home';
 
 const Amenities = ({ home, isScreenMedium }) => {
+  const ref = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setScrollLocationY('amenitiesRef', ref.current));
+  }, []);
+
   return (
-    <Division title="편의시설">
+    <Division title="편의시설" sentRef={ref}>
       <StAmenityList>
         {home.amenities.map((amenity, i) => {
           if (isScreenMedium && i > 4) return;

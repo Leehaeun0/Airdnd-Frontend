@@ -27,7 +27,7 @@ export const postReservation = async payload => {
 //     hostId: 0,
 //     hostFirstName: 'Emma',
 //     profileImg:
-//       'https://a0.muscache.com/im/pictures/user/8eb07743-000f-47ee-9012-2086ac20d9f3.jpg?im_w=720',
+//       'https://images.unsplash.com/photo-1506477331477-33d5d8b3dc85?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1274&q=80',
 //     signupDate: '2019년 1월',
 //     reviewCount: 82,
 //     identityVerified: true,
@@ -43,18 +43,18 @@ export const postReservation = async payload => {
 //   subTitle: '제주도님이 호스팅하는 공동주택의 개인실',
 //   feature: '최대 인원 1명 · 원룸 · 침대 1개 · 단독 사용 욕실 1개',
 //   location: {
-//     lat: '37.62197524055062',
-//     lng: '127.16017523675508',
+//     lat: 37.62197524055062,
+//     lng: 127.16017523675508,
 //   },
 //   address: 'Cheju, 제주도, 한국',
-//   addressDescription: `김포공항과 인천공항으로 가는 지하철역 바로 앞에 위치하고 있습니다.
-//     고속터미널이 있어 시외 여행이 수월합니다.
+//   addressDescription: `<span>김포공항과 인천공항으로 가는 지하철역 바로 앞에 위치하고 있습니다.
+//     고속터미널이 있어 시외 여행이 수월합니다.<br />
 //     한강 시민 공원과 이태원이 가깝습니다.
 //     근처 모든곳에 쇼핑몰, 레스토랑, 커피숍, 편의점, 병원이 있습니다.
-//     시내 어디든 갈수 있는 시내버스와 지하철역이 매우 가까이에 있습니다.`,
+//     시내 어디든 갈수 있는 시내버스와 지하철역이 매우 가까이에 있습니다.</span>`,
 //   homeType: '개인실',
 //   capacity: 7,
-//   dates: [''], // ...?
+//   dates: [''],
 //   checkin: '오후 3:00 - 오전 2:00',
 //   checkout: '오전 11:00',
 //   price: '23,000',
@@ -94,7 +94,7 @@ export const postReservation = async payload => {
 //     },
 //   ],
 //   description:
-//     '제주시 아라동에 위치해 있으며 공항을 자가용 및 택시로 이용할 시 30분이면 충분히 오가는 거리로 주변이 조용하며 관광지를 용이하게 이용할 수 있는 거리에 있습이다 종합병원과 10분여거리에 있으며 제주대학교, 생태숲, 5.16도로와 서귀포를 이어주는 에조로 거리에 근접해 갈 수 있습니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기바랍니다 숙소 제주시 아라동에 위치해 있으며 공항을 자가용 및 택시로 이용할 시 30분이면 충분히 오가는 거리로 주변이 조용하며 관광지를 용이하게 이용할 수 있는 거리에 있습이다 종합병원과 10분여거리에 있으며 제주대학교, 생태숲, 5.16도로와 서귀포를 이어주는 에조로 거리에 근접해 갈 수 있습니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다. 즐거운 여행보내시기 바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기바랍니다 숙소 제주시 아라동에 위치해 있으며 공항을 자가용 및 택시로 이용할 시 30분이면 충분히 오가는 거리로 주변이 조용하며 관광지를 용이하게 이용할 수 있는 거리에 있습이다 종합병원과 10분여거리에 있으며 제주대학교, 생태숲, 5.16도로와 서귀포를 이어주는 에조로 거리에 근접해 갈 수 있습니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다. 즐거운 여행보내시기 바랍니다. 공간이 작은원룸형이지만 청결을 우선으로 게스트이용후에 모든 침구류등을 세탁하여 제공합니다. 즐거운 여행보내시기 바랍니다',
+//     '<span>"푸른 감귤밭안에서 보이는 협재바다"<br/>귤한가는 제주도 서쪽 한림읍 협재리에 위치한 감귤 밭 한가운데 있는 숙소입니다. <br/>평상에 앉아 감귤밭의 경치와 협재바다를 바라보고<br/>감귤밭에서 산책을 하시면서 제주에서의 여유를 느껴보세요.<br/><br/><span class="_6ijom0">숙소</span><br/>귤밭 한가운데 있는집 귤한가 202호<br/>객실에 자쿠지 욕조가 구비되어 있어서 반신욕을 하면서  넓은 통창을 통해 감귤밭의 경치와 협재바다를 바라볼수 있는 객실입니다. <br/>객실당 2인까지만 입실 하실수 있으며 미성년자는 만 12세 이상만 보호자 동반하에만<br/>입실이 가능하므로 양해 부탁드리며 예약시 확인 부탁드립니다.<br/>귤한가 좌측 맞은편에는 게스트분들을 위한 돌창고 카페가 있어서 음료를 주문하시거나 <br/>음식을 가져가서 드실 수 있습니다.<br/><br/><span class="_6ijom0">게스트 이용 가능 공간/시설</span><br/>- 카페에서는 음료를 주문하시거나 음식을 가져가서 드실 수 있습니다.<br/>   전자렌지와 토스트기 이용 가능하며 아침 9시~10반사이에 오시면 커피나 주스를 무료로 드리고 있습니다.<br/>-7,8월에는 2층 공용수영장이 개방되며 체크인 순서 예약제로 한시간에 한팀씩만 사용하도록 하고 있습니다. 다른 팀이 예약이 없으면 연장이나 복수 예약 가능합니다.<br/>-11월~1월에는 무료 감귤체험이 가능하며 귤도 객실에 매일 제공됩니다.<br/><br/><span class="_6ijom0">기타 주의사항</span><br/>귤한가는 사고를 예방하기 위하여 미성년자는 만12세 이상만 보호자 동반하에 입실을 허용하고 있습니다. 양해 부탁드리며 예약시 확인 부탁 드립니다.</span>',
 
 //   bedrooms: [
 //     {
@@ -206,7 +206,8 @@ export const postReservation = async payload => {
 //         icon: '',
 //       },
 //     ],
-//   }, // ...?
+//   },
+//   minimumStay: 3,
 
 //   reviews: {
 //     cleanliness: 5.0,
@@ -221,7 +222,7 @@ export const postReservation = async payload => {
 //       {
 //         userId: 0,
 //         userProfileImg:
-//           'https://a0.muscache.com/im/pictures/user/02d1c910-7279-445e-a392-6ecba45874bd.jpg?im_w=720',
+//           'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2252&q=80',
 //         userFirstName: '태환',
 //         date: '2020년 8월',
 //         contents:
@@ -230,7 +231,7 @@ export const postReservation = async payload => {
 //       {
 //         userId: 0,
 //         userProfileImg:
-//           'https://a0.muscache.com/im/pictures/user/7c7d20f4-ce78-4f09-b27a-d0023599c69d.jpg?im_w=720',
+//           'https://images.unsplash.com/photo-1472806679307-eab7abd1eb32?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80',
 //         userFirstName: '선재',
 //         date: '2020년 5월',
 //         contents:
@@ -251,7 +252,8 @@ export const postReservation = async payload => {
 //           'https://a0.muscache.com/im/pictures/user/801f771e-6837-432e-9eaf-81ed2579acc5.jpg?im_w=720',
 //         userFirstName: '지원',
 //         date: '2020년 2월',
-//         contents: '강남역부근에서 볼일 있으신분들은 추천드립니다.',
+//         contents:
+//           '하루밖에 머무르지 못해 아쉬웠어요, 너무너무 좋았습니다! 우산 두고 나왔는데 연락주셔서 다행히 챙겨왔어요! 체크인 할 때 캐리어도 같이 들어주시고 너무너무 감사했어요! 카페에서 주신 커피와 청귤에에드도 너무 맛있었습니다  겨울에 귤 열리는 시즌에 다시 가고 싶어요!',
 //       },
 //       {
 //         userId: 0,
@@ -294,6 +296,6 @@ export const postReservation = async payload => {
 // };
 
 // export const getHome = async () => {
-//   await sleep(0);
+//   await sleep(200);
 //   return home;
 // };

@@ -5,6 +5,7 @@ import Profile from '../Global/Profile';
 const HomeExplain = ({ isLoading, home }) => {
   const [readMore, setReadMore] = useState(false);
   const onClick = () => setReadMore(true);
+  const randomNum = Math.ceil(Math.random() * 10000);
 
   return (
     <>
@@ -17,7 +18,8 @@ const HomeExplain = ({ isLoading, home }) => {
           <Profile
             mark
             isSupperhost={home.host.isSupperhost}
-            profileImg={home.host.profileImg}
+            profileImg={`https://loremflickr.com/320/240?random=${randomNum}`}
+            // profileImg={home.host.profileImg}
             lastName={home.host.hostFirstName}
           />
         )}

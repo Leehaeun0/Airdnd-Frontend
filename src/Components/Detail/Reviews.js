@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Division from './Division';
 import Rating from '../Global/Rating';
 import Button from '../Global/Button';
 import Profile from '../Global/Profile';
+import { setScrollLocationY } from '../../Modules/home';
 
 const Reviews = ({ home }) => {
   const {
@@ -18,12 +20,25 @@ const Reviews = ({ home }) => {
     comments,
   } = home.reviews;
 
+  const ref = useRef();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setScrollLocationY('reviewsRef', ref.current));
+  }, []);
+
   const addDecimal = num => {
     return (num + '').length === 1 ? num + '.0' : num;
   };
 
+  const onClick = () => {
+    console.log(ref.current);
+    ref.current.scrollIntoView();
+  };
+
   return (
     <Division
+      sentRef={ref}
       title={
         <Rating
           scale="2.2"
@@ -35,7 +50,7 @@ const Reviews = ({ home }) => {
     >
       <div style={{ marginBottom: '24px' }}>
         <StEstimation percent={cleanliness * 20}>
-          <span>청결도</span>
+          <span onClick={onClick}>청결도</span>
           <div aria-label={`5점 만점에 ${cleanliness}점`}>
             <div />
           </div>
@@ -80,12 +95,14 @@ const Reviews = ({ home }) => {
       <ul>
         {comments.map((comment, i) => {
           if (i > 5) return;
+          const randomNum = Math.ceil(Math.random() * 10000);
           return (
             <StReview key={i}>
               <StRiviewer>
                 <Profile
                   lastName={comment.userFirstName}
-                  profileImg={comment.userProfileImg}
+                  // profileImg={comment.userProfileImg}
+                  profileImg={`https://loremflickr.com/320/240?random=${randomNum}`}
                 />
                 <div>
                   {comment.userFirstName}

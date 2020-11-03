@@ -140,13 +140,15 @@ const StModalDiv = styled.div`
 `;
 
 const StModalCloseBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
   width: 32px;
   height: 32px;
   padding: 7.8px 7px;
-  align-items: center;
   text-align: center;
   border-radius: 50%;
   border: 2px solid rgba(0, 0, 0, 0);

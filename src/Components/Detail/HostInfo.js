@@ -9,7 +9,6 @@ import Button from '../Global/Button';
 const HostInfo = ({ home }) => {
   const {
     hostFirstName,
-    profileImg,
     isSupperhost,
     signupDate,
     reviewCount,
@@ -20,10 +19,16 @@ const HostInfo = ({ home }) => {
     responseTime,
   } = home.host;
 
+  const randomNum = Math.ceil(Math.random() * 10000);
+
   return (
     <Division>
       <StHostWrapper>
-        <Profile isSupperhost={isSupperhost} mark profileImg={profileImg} />
+        <Profile
+          isSupperhost={isSupperhost}
+          mark
+          profileImg={`https://loremflickr.com/320/240?random=${randomNum}`}
+        />
         <div>
           <h3>호스트: {hostFirstName}님</h3>
           <span>회원 가입일: {signupDate}</span>

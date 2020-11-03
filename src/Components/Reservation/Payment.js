@@ -20,7 +20,7 @@ const Payment = ({ onClickPayment, payState, postState }) => {
             </StButton>
           </>
         )}
-        {payState === 'paySuccess' && success && (
+        {payState === 'paySuccess' && (
           <>
             <div>결제를 완료하셨습니다.</div>
             <StButton

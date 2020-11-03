@@ -1,33 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Division from './Division';
-import Map from '../Global/Map';
-import Checkbox from '../Global/Checkbox';
-import Button from '../Global/Button';
+import '../../style/HomeMap.css';
+import { compose, withProps } from 'recompose';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import MarkerWithLabel from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 
-const HomeMap = () => {
-  const [check, setCheck] = useState(false);
-
-  const onToggle = e => setCheck(e.target.checked);
+const HomeMap = compose(
+  withProps({
+    googleMapURL:
+      'https://maps.googleapis.com/maps/api/js?key=AIzaSyCqryK5lMUxY0i_-Zu1cUrgW3_Geg4BrWA&v=3.exp&libraries=geometry,drawing,places',
+    loadingElement: <div style={{ height: '100%' }} />,
+    containerElement: <div style={{ height: '480px', position: 'relative' }} />,
+    mapElement: <div style={{ height: '100%' }} />,
+  }),
+  withScriptjs,
+  withGoogleMap,
+)(({ children, location, zoom }) => {
+  console.log(window);
   return (
-    <Division title="위치">
-      <StMap aria-label="숙소 위치 지도 입니다">
-        <StCheckbox value checked={check} onChange={onToggle}>
-          대중교통
-        </StCheckbox>
-        <StScaleBtn>
-          <Button type="submit">
-            <svg viewBox="0 0 16 16" focusable="false">
-              <path d="M7 1a1 1 0 0 1 2 0v14a1 1 0 1 1-2 0V1z"></path>
-              <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path>
-            </svg>
-          </Button>
-          <Button>
-            <svg viewBox="0 0 16 16" focusable="false">
-              <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z"></path>
-            </svg>
-          </Button>
-        </StScaleBtn>
+    <GoogleMap
+      zoom={zoom}
+      defaultCenter={location}
+      options={{
+        scrollwheel: false,
+        fullscreenControl: false,
+        mapTypeControl: false,
+        zoomControl: false,
+      }}
+    >
+      {children}
+      <MarkerWithLabel
+        position={location}
+        icon={{
+          scale: 0,
+          path: '',
+        }}
+        labelAnchor={new window.google.maps.Point(0, 0)}
+        labelStyle={{
+          transform: 'translate(-50%, -50%)',
+          width: '48px',
+          height: '48px',
+        }}
+      >
         <StHomeIconWapper>
           <svg
             viewBox="0 0 24 24"
@@ -47,176 +61,40 @@ const HomeMap = () => {
             <path d="m16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z"></path>
           </svg>
         </StHomeIconWapper>
-        <StNotice>정확한 위치는 예약 완료 후에 표시됩니다.</StNotice>
-      </StMap>
-      <StH4>Ara-dong, Jeju-si, 제주도, 한국</StH4>
-      <p>
-        생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의 아픈 역사를 들여다 보는
-        시간도 좋을 듯 합니다)생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의
-        아픈 역사를 들여다 보는 시간도 좋을 듯 합니다)생태숲, 제주대학교,
-        별빛누리공원, 4.3공원(제주의 아픈 역사를 들여다 보는 시간도 좋을 듯
-        합니다)생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의 아픈 역사를
-        들여다 보는 시간도 좋을 듯 합니다)생태숲, 제주대학교, 별빛누리공원,
-        4.3공원(제주의 아픈 역사를 들여다 보는 시간도 좋을 듯 합니다)생태숲,
-        제주대학교, 별빛누리공원, 4.3공원(제주의 아픈 역사를 들여다 보는 시간도
-        좋을 듯 합니다)생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의 아픈
-        역사를 들여다 보는 시간도 좋을 듯 합니다)생태숲, 제주대학교,
-        별빛누리공원, 4.3공원(제주의 아픈 역사를 들여다 보는 시간도 좋을 듯
-        합니다)생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의 아픈 역사를
-        들여다 보는 시간도 좋을 듯 합니다)생태숲, 제주대학교, 별빛누리공원,
-        4.3공원(제주의 아픈 역사를 들여다 보는 시간도 좋을 듯 합니다)생태숲,
-        제주대학교, 별빛누리공원, 4.3공원(제주의 아픈 역사를 들여다 보는 시간도
-        좋을 듯 합니다)생태숲, 제주대학교, 별빛누리공원, 4.3공원(제주의 아픈
-        역사를 들여다 보는 시간도 좋을 듯 합니다)
-      </p>
-      <Button padding="13px 23px;" transition>
-        자세한 위치 정보
-      </Button>
-    </Division>
+      </MarkerWithLabel>
+    </GoogleMap>
   );
-};
+});
 
-// const StMap = styled.div`
-const StMap = styled(Map)`
-  background-color: #e3e8d6;
-  position: relative;
-  width: 100%;
-  height: 480px;
-  margin-bottom: 32px;
-`;
-
-const StCheckbox = styled(Checkbox)`
-  position: absolute;
-  top: 24px;
-  right: 82px;
-  padding: 0.5rem 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-  border-radius: 8px;
-  white-space: nowrap;
-  background-color: ${({ theme }) => theme.color.white};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.lightGray};
-  }
-
-  span:nth-of-type(1) {
-    background-color: ${({ theme }) => theme.color.white};
-  }
-
-  span:last-child {
-    padding-left: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-  }
-`;
-
-const StScaleBtn = styled.div`
-  width: 40px;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  top: 24px;
-  right: 24px;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: ${({ theme }) => theme.color.white};
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-
-  button {
-    border: none;
-    padding: 0%;
-    border-radius: 0;
-
-    &:nth-of-type(2) {
-      display: flex;
-      flex-direction: column;
-
-      &::before {
-        content: '';
-        width: 80%;
-        min-width: 80%;
-        height: 1px;
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    svg {
-      margin: 12px;
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-      color: #222;
-      height: 16;
-      width: 16;
-      fill: currentColor;
-    }
-  }
-`;
-
-const StNotice = styled.div`
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 18px;
-  background-color: ${({ theme }) => theme.color.white};
-`;
+export default HomeMap;
 
 const StHomeIconWapper = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 48px;
   height: 48px;
-  transform: translate(-50%, -50%);
-  background-color: #000;
+  background-color: #000000;
   border-radius: 50%;
-  z-index: 10;
-  color: ${({ theme }) => theme.color.white};
+  color: #ffffff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 0px 1px inset,
     rgba(0, 0, 0, 0.18) 0px 1px 2px;
 
   svg:nth-of-type(1) {
     height: 28px;
     width: 28px;
-    fill: currentcolor;
+    fill: #ffffff;
   }
   svg:nth-of-type(2) {
     position: absolute;
     top: -1px;
     right: 0;
-    fill: ${({ theme }) => theme.color.main};
+    fill: #ff385c;
     height: 16px;
     width: 16px;
-    stroke: ${({ theme }) => theme.color.white};
+    stroke: #ffffff;
     stroke-width: 8;
     overflow: visible;
     paint-order: stroke;
   }
 `;
-
-const StH4 = styled.h4`
-  margin-bottom: 16px;
-  line-height: 20px;
-  font-weight: 600;
-
-  & + p {
-    width: 92%;
-    overflow: hidden;
-    margin-bottom: 48px;
-    line-height: 24px;
-    word-wrap: break-word;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-  }
-`;
-
-export default HomeMap;

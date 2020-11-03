@@ -4,22 +4,20 @@ const SET_CHECKIN = 'reservation/SET_CHECKIN';
 const SET_CHECKOUT = 'reservation/SET_CHECKOUT';
 const SET_GUESTS = 'reservation/SET_GUESTS';
 const DELETE_CHECKINOUT = 'reservation/DELETE_CHECKINOUT';
-const CHANGE_INITIAL_DATE = 'reservation/CHANGE_INITIAL_DATE';
-const CHANGE_INITIAL_GUESTS = 'reservation/CHANGE_INITIAL_GUESTS';
 const SET_TO_HOST_MESSAGE = 'reservation/SET_TO_HOST_MESSAGE';
 const CHANGE_INITIAL_MESSAGE = 'reservation/CHANGE_INITIAL_MESSAGE';
 const POST_RESERVATION = 'reservation/POST_RESERVATION';
 const POST_RESERVATION_SUCCESS = 'reservation/POST_RESERVATION_SUCCESS';
 const POST_RESERVATION_ERROR = 'reservation/POST_RESERVATION_ERROR';
+const SET_INITIAL_DATAS = 'reservation/SET_INITIAL_DATAS';
 
 export const setCheckin = checkin => ({ type: SET_CHECKIN, checkin });
 export const setCheckout = checkout => ({ type: SET_CHECKOUT, checkout });
 export const setResevationGuest = guests => ({ type: SET_GUESTS, guests });
 export const deleteCheckInOut = () => ({ type: DELETE_CHECKINOUT });
-export const setChangeInitialDate = () => ({ type: CHANGE_INITIAL_DATE });
-export const setChangeInitialGuests = () => ({ type: CHANGE_INITIAL_GUESTS });
 export const setToHostMessage = text => ({ type: SET_TO_HOST_MESSAGE, text });
 export const setChangeInitialMessage = () => ({ type: CHANGE_INITIAL_MESSAGE });
+export const setInitialDatas = data => ({ type: SET_INITIAL_DATAS, data });
 
 export const postReservation = payload => async dispatch => {
   console.log('post!!!!!!!!!!');
@@ -41,20 +39,18 @@ const getDateDiff = (date1, date2) => {
 };
 
 const initialState = {
-  checkin: '2020.09.22',
-  checkout: '2020.09.25',
-  dateDiff: 3,
+  checkin: '',
+  checkout: '',
+  dateDiff: 0,
   reservedDates: [
-    '2020.08.15',
-    '2020.08.16',
-    '2020.09.20',
-    '2020.09.28',
-    '2020.10.20',
-    '2020.10.25',
+    '2020.11.20',
+    '2020.11.25',
+    '2020.12.15',
+    '2020.12.16',
+    '2020.12.20',
+    '2021.01.28',
   ],
   guests: { adult: 1, child: 0, infant: 0 },
-  changeInitialDate: false,
-  changeInitialGuests: false,
   toHostMessage: '',
   changeInitialMessage: false,
   postState: {
@@ -94,18 +90,6 @@ const reservation = (state = initialState, action) => {
         guests: action.guests,
       };
     }
-    case CHANGE_INITIAL_DATE: {
-      return {
-        ...state,
-        changeInitialDate: true,
-      };
-    }
-    case CHANGE_INITIAL_GUESTS: {
-      return {
-        ...state,
-        changeInitialGuests: true,
-      };
-    }
     case SET_TO_HOST_MESSAGE: {
       return {
         ...state,
@@ -134,6 +118,19 @@ const reservation = (state = initialState, action) => {
       return {
         ...state,
         postState: { isLoading: false, success: false, error: action.error },
+      };
+    }
+    case SET_INITIAL_DATAS: {
+      return {
+        ...state,
+        checkin: action.data.checkIn || '',
+        checkout: action.data.checkOut || '',
+        dateDiff: getDateDiff(action.data.checkIn, action.data.checkOut),
+        guests: {
+          adult: +action.data.adult || 1,
+          child: +action.data.child || 0,
+          infant: +action.data.infant || 0,
+        },
       };
     }
     default:

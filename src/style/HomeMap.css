@@ -1,0 +1,24 @@
+.gm-bundled-control.gm-bundled-control-on-bottom {
+  position: absolute !important;
+  top: 0 !important;
+  margin: 0 !important;
+  right: 64px !important;
+}
+
+.gm-svpc {
+  top: 120px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px !important;
+}
+
+.gm-fullscreen-control {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px !important;
+  margin: 0 !important;
+  top: initial !important;
+  right: 24px !important;
+  bottom: 24px !important;
+}
+ 

@@ -24,6 +24,7 @@ const Home = ({
   onHoverHome,
   onBlurHome,
   dateDiff,
+  href,
 }) => {
   const {
     homeId,
@@ -52,7 +53,8 @@ const Home = ({
         imageCount={imageCount}
         isSuperhost={isSuperhost}
       />
-      <StHome href={`http://localhost:3000/detail/${homeId}`}>
+      {/* <StHome href={`http://localhost:3000/detail/${homeId}`}> */}
+      <StHome href={href}>
         <StDetailWrapper>
           <StDetail>{subTitle}</StDetail>
           <StTitle>{title}</StTitle>

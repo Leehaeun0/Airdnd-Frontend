@@ -2,56 +2,54 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   setResevationGuest,
-  setChangeInitialGuests,
+  // setChangeInitialGuests,
 } from '../../Modules/reservation';
 import DetailGuestPopup from '../../Components/Detail/DetailGuestPopup';
 
 const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
-  const {
-    adult: searchAdult,
-    child: searchChild,
-    infant: searchInfant,
-  } = useSelector(state => state.searchForm.guests);
-  const {
-    adult: reserveAdult,
-    child: reserveChild,
-    infant: reserveInfant,
-  } = useSelector(state => state.reservation.guests);
-  const { changeInitialGuests } = useSelector(state => state.reservation);
+  // const {
+  //   adult: searchAdult,
+  //   child: searchChild,
+  //   infant: searchInfant,
+  // } = useSelector(state => state.searchForm.guests);
+  const { adult, child, infant } = useSelector(
+    state => state.reservation.guests,
+  );
+  // const { changeInitialGuests } = useSelector(state => state.reservation);
   const { capacity } = useSelector(state => state.home.homeState.home);
   const dispatch = useDispatch();
   const [popupState, SetPopupState] = useState(false);
   const popup = useRef();
 
-  const newAdult = (changeInitialGuests ? reserveAdult : searchAdult) || 1;
-  const newChild = changeInitialGuests ? reserveChild : searchChild;
-  const newInfant = changeInitialGuests ? reserveInfant : searchInfant;
+  // const newAdult = (changeInitialGuests ? reserveAdult : searchAdult) || 1;
+  // const newChild = changeInitialGuests ? reserveChild : searchChild;
+  // const newInfant = changeInitialGuests ? reserveInfant : searchInfant;
 
-  const changeGuestData = (adult, child, infant) => {
-    const data = { adult, child, infant };
+  const changeGuestData = (_adult, _child, _infant) => {
+    const data = { adult: _adult, child: _child, infant: _infant };
     dispatch(setResevationGuest(data));
-    if (!changeInitialGuests) dispatch(setChangeInitialGuests());
+    // if (!changeInitialGuests) dispatch(setChangeInitialGuests());
   };
 
-  const isFullCapacity = newAdult + newChild >= capacity;
+  const isFullCapacity = adult + child >= capacity;
 
   const increaseGuestCount = guestType => {
-    if ((guestType === 'adult' || !newAdult) && !isFullCapacity) {
-      changeGuestData(newAdult + 1, newChild, newInfant);
+    if ((guestType === 'adult' || !adult) && !isFullCapacity) {
+      changeGuestData(adult + 1, child, infant);
     } else if (guestType === 'child' && !isFullCapacity) {
-      changeGuestData(newAdult, newChild + 1, newInfant);
-    } else if (guestType === 'infant' && newInfant < 5) {
-      changeGuestData(newAdult, newChild, newInfant + 1);
+      changeGuestData(adult, child + 1, infant);
+    } else if (guestType === 'infant' && infant < 5) {
+      changeGuestData(adult, child, infant + 1);
     }
   };
 
   const decreaseGuestCount = guestType => {
-    if (guestType === 'adult' && newAdult > 1) {
-      changeGuestData(newAdult - 1, newChild, newInfant);
-    } else if (guestType === 'child' && newChild > 0) {
-      changeGuestData(newAdult, newChild - 1, newInfant);
-    } else if (guestType === 'infant' && newInfant > 0) {
-      changeGuestData(newAdult, newChild, newInfant - 1);
+    if (guestType === 'adult' && adult > 1) {
+      changeGuestData(adult - 1, child, infant);
+    } else if (guestType === 'child' && child > 0) {
+      changeGuestData(adult, child - 1, infant);
+    } else if (guestType === 'infant' && infant > 0) {
+      changeGuestData(adult, child, infant - 1);
     }
   };
 
@@ -75,9 +73,9 @@ const DeatailGuestPopupContainer = ({ displayName, ...rest }) => {
 
   return (
     <DetailGuestPopup
-      adult={newAdult}
-      child={newChild}
-      infant={newInfant}
+      adult={adult}
+      child={child}
+      infant={infant}
       popup={popup}
       onOpenPopup={onOpenPopup}
       popupState={popupState}

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Division = ({ children, title, border, padding }) => {
+const Division = ({ children, title, border, padding, sentRef }) => {
   return (
-    <StDivision border={border} padding={padding}>
+    <StDivision border={border} padding={padding} ref={sentRef}>
       {title && <h3>{title}</h3>}
       {children}
     </StDivision>
