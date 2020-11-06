@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import DetailFixedHeader from '../../Components/Detail/DetailFixedHeader';
 
 const DetailFixedHeaderContainer = ({ isScrollUnderBox }) => {
-  const { amenitiesRef, reviewsRef, locationRef, checkPopupRef } = useSelector(
-    state => state.home.scrollState,
-  );
+  const { scrollState, homeState } = useSelector(state => state.home);
+  const { amenitiesRef, reviewsRef, locationRef, checkPopupRef } = scrollState;
+  const { count, rating } = homeState.home.reviews;
 
   const clickNav = ref => {
     window.scroll({
@@ -38,6 +38,8 @@ const DetailFixedHeaderContainer = ({ isScrollUnderBox }) => {
       locationRef={locationRef}
       onClickReserveBtn={onClickReserveBtn}
       isScrollUnderBox={isScrollUnderBox}
+      count={count}
+      rating={rating}
     />
   );
 };

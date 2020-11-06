@@ -10,6 +10,8 @@ const DetailNav = ({
   locationRef,
   onClickReserveBtn,
   isScrollUnderBox,
+  count,
+  rating,
 }) => {
   return (
     <StWrapper>
@@ -33,7 +35,7 @@ const DetailNav = ({
           <StReserveWrapper isScrollUnderBox={isScrollUnderBox}>
             <StInfo>
               ₩40,000<span>/박</span>{' '}
-              <Rating scale="1.2" rate="4.82" count="79" />
+              <Rating scale="1.2" rate={rating} count={count} />
             </StInfo>
 
             <StButton color="main" hover onClick={onClickReserveBtn}>
