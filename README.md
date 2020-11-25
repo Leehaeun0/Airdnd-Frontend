@@ -5,6 +5,7 @@
 <br>
 <br>
 [![aidnd](/src/Assets/Img/airdndCapture.png)](https://www.youtube.com/watch?v=iB43qkoJuB0)   
+유튜브 링크 : <https://www.youtube.com/watch?v=iB43qkoJuB0>
 
 <br>
 
